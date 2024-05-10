@@ -16,7 +16,7 @@ if (!in_array($current_page, $visited_pages)) {
 }
 
 // Step 5: Serialize the array and set it as a cookie named 'visited_pages' with a one-hour expiration time
-setcookie('visited_pages', serialize($visited_pages), time() + 3600, '/flexfit/');
+setcookie('visited_pages', serialize($visited_pages), time() + 3600, '/');
 
 // Check if the cookie for previously visited products exists
 if(isset($_COOKIE['visited_products'])) {
