@@ -1,4 +1,23 @@
 <?php
+
+if (!isset($_COOKIE['visited_pages'])) {
+    // Step 2: If the cookie is not set, create an empty array
+    $visited_pages = [];
+} else {
+    // Step 3: If the cookie is set, unserialize its value to an array
+    $visited_pages = unserialize($_COOKIE['visited_pages']);
+}
+
+// Step 4: Append the current page name to the array
+$current_page = 'Services'; // Get the current page name
+if (!in_array($current_page, $visited_pages)) {
+    // Add the current page name only if it's not already in the array
+    $visited_pages[] = $current_page;
+}
+
+// Step 5: Serialize the array and set it as a cookie named 'visited_pages' with a one-hour expiration time
+setcookie('visited_pages', serialize($visited_pages), time() + 3600, '/flexfit/');
+
 // Check if the cookie for previously visited products exists
 if(isset($_COOKIE['visited_products'])) {
     $visited_products = json_decode($_COOKIE['visited_products'], true);
@@ -111,13 +130,13 @@ if(isset($_GET['product_id'])) {
                         <span class="mx-auto text-xl font-black leading-none text-gray-900 select-none">FlexiFit<span class="text-indigo-600">.</span></span>
                     </a>
                     <nav class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
-                        <a href="./index.html" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Home</a>
-                        <a href="./about.html" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">About</a>
+                        <a href="./index.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Home</a>
+                        <a href="./about.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">About</a>
                         <a href="./services.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Services</a>
-                        <a href="./news.html" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">News</a>
+                        <a href="./news.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">News</a>
                         <a href="./authenticate.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Contact</a>
                         <a href="./user.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">User</a>
-
+                        <a href="./track.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Visited</a>
                     </nav>
                 </div>
 
@@ -144,7 +163,7 @@ if(isset($_GET['product_id'])) {
     </section>
 
     <!-- Last five previously visited products -->
-    <section class="py-20 bg-gray-200">
+    <section class="py-20 bg-yellow-100">
         <div class="container mx-auto">
             <h2 class="text-3xl font-semibold mb-8">Last Five Previously Visited Products</h2>
             <div class="grid grid-cols-2 gap-6">
@@ -159,5 +178,57 @@ if(isset($_GET['product_id'])) {
             </div>
         </div>
     </section>
+
+    <section class="py-20 bg-blue-200">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-semibold mb-8">Top 5 Products Based on Review</h2>
+                <div class="grid grid-cols-2 gap-6">
+                    <?php
+
+                    // Display the top 5 products
+                    $top_five = array(
+                                    array(
+                                        'name' => 'Burger',
+                                        'description' => 'its a symphony of flavors dancing on the palate',
+                                        'image' => 'burger.jpg',
+                                        'review' => 'very nice'
+                                    ),
+                                    array(
+                                        'name' => 'bowl',
+                                        'description' => 'each ingredient whispers secrets of nature bounty',
+                                        'image' => 'burger3.jpg',
+                                        'review' => 'very nice'
+                                    ),
+                                    array(
+                                        'name' => 'salad',
+                                        'description' => 'With every taste, memories awaken, transporting us to moments of joy and nostalgia.',
+                                        'image' => 'fruit.jpg',
+                                        'review' => 'well done!'
+                                    ),
+                                    array(
+                                        'name' => 'blueberry',
+                                        'description' => 'food is a delightful adventure ',
+                                        'image' => 'fruit3.jpg',
+                                        'review' => 'must try'
+                                    ),
+                                    array(
+                                        'name' => 'mix fruit',
+                                        'description' => 'every meal is an opportunity to celebrate life abundance and diversity.',
+                                        'image' => 'fruit4.jpg',
+                                        'review' => 'nostalgia'
+                                    ),
+                                    );
+                    foreach($top_five as $product):
+                    ?>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" class="mb-4">
+                            <h3 class="text-xl font-semibold mb-2"><?php echo $product['name']; ?></h3>
+                            <p class="text-gray-700 mb-4"><?php echo $product['description']; ?></p>
+                            <p class="text-indigo-600"><?php echo $product['review']; ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
 </body>
 </html>

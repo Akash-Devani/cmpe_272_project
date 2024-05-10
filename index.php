@@ -1,3 +1,26 @@
+<?php
+// Step 1: Check if the cookie 'visited_pages' is already set
+if (!isset($_COOKIE['visited_pages'])) {
+    // Step 2: If the cookie is not set, create an empty array
+    $visited_pages = [];
+} else {
+    // Step 3: If the cookie is set, unserialize its value to an array
+    $visited_pages = unserialize($_COOKIE['visited_pages']);
+}
+
+// Step 4: Append the current page name to the array
+$current_page = 'Home'; // Get the current page name
+if (!in_array($current_page, $visited_pages)) {
+    // Add the current page name only if it's not already in the array
+    $visited_pages[] = $current_page;
+}
+
+// Step 5: Serialize the array and set it as a cookie named 'visited_pages' with a one-hour expiration time
+setcookie('visited_pages', serialize($visited_pages), time() + 3600, '/');
+
+// Now you can continue with the rest of your PHP code and HTML content for this page
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,24 +39,15 @@
                 <span class="mx-auto text-xl font-black leading-none text-gray-900 select-none">FlexiFit<span class="text-indigo-600">.</span></span>
             </a>
             <nav class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
-                <a href="./index.html" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Home</a>
-                <a href="./about.html" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">About</a>
+                <a href="./index.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Home</a>
+                <a href="./about.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">About</a>
                 <a href="./services.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Services</a>
-                <a href="./news.html" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">News</a>
+                <a href="./news.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">News</a>
                 <a href="./authenticate.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Contact</a>
                 <a href="./user.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">User</a>
-
+                <a href="./track.php" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Visited</a>
             </nav>
         </div>
-
-        <!-- <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
-            <a href="#" class="text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
-                Sign in
-            </a>
-            <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                Sign up
-            </a>
-        </div> -->
     </div>
 </section>
 

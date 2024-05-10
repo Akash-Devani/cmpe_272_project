@@ -1,3 +1,4 @@
+
 <?php
 // Define the path to the contacts file
 $file_path = 'contacts.txt';
