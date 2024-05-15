@@ -179,5 +179,126 @@ setcookie('visited_pages', serialize($visited_pages), time() + 3600, '/');
             </div>
         </div>
     </section>
+
+    <!-- Additional section to display data from another database table -->
+    <section class="py-20 bg-green-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-8">Additional Data from Karan's Database </h2>
+        <div class="flex flex-wrap justify-between">
+        <form action="#" method="POST">
+        <button type="submit" name="submit_print_array" class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Curl Call</button>
+        </form>
+        <div class="output-container flex-1 mt-10" style="margin-left: -1400px;" >
+            <div class="output mt-4 bg-yellow-100">
+            <?php
+                $products = array(
+                    array(
+                        'Id' => '1',
+                        'first_name' => 'Karan',
+                        'last_name' => 'Desai',
+                        'email' => 'karan@gmail.com',
+                        'home_address' => 'abc',
+                        'home_phone' => '123',
+                        'cell_phone' => '987'
+                    ),
+                    array(
+                        'Id' => '2',
+                        'first_name' => 'Rishabh',
+                        'last_name' => 'Jain',
+                        'email' => 'rishabh@gmail.com',
+                        'home_address' => 'cde',
+                        'home_phone' => '456',
+                        'cell_phone' => '654'
+                    ),
+                    array(
+                        'Id' => '3',
+                        'first_name' => 'Akash',
+                        'last_name' => 'Devani',
+                        'email' => 'akash@gmail.com',
+                        'home_address' => 'asv',
+                        'home_phone' => '887',
+                        'cell_phone' => '332'
+                    ),
+                    array(
+                         'Id' => '4',
+                         'first_name' => 'Tripti',
+                         'last_name' => 'G',
+                         'email' => 'tripti@gmail.com',
+                         'home_address' => 'kjh',
+                         'home_phone' => '567',
+                         'cell_phone' => '980'
+                    ),
+                    array(
+                          'Id' => '5',
+                          'first_name' => 'Geno',
+                          'last_name' => 'A',
+                          'email' => 'geno@gmail.com',
+                          'home_address' => 'uji',
+                          'home_phone' => '211',
+                          'cell_phone' => '344'
+                    ),
+                    array(
+                        'Id' => '6',
+                        'first_name' => 'Pratik',
+                        'last_name' => 'K',
+                        'email' => 'pratik@gmail.com',
+                        'home_address' => 'soo',
+                        'home_phone' => '876',
+                        'cell_phone' => '456'
+                    ),
+                    array(
+                        'Id' => '8',
+                        'first_name' => 'Karan',
+                        'last_name' => 'Desai',
+                        'email' => 'karan@gmail.com',
+                        'home_address' => 'abc',
+                        'home_phone' => '123',
+                        'cell_phone' => '987'
+                    ),
+                    array(
+                        'Id' => '9',
+                        'first_name' => 'Rishabh',
+                        'last_name' => 'Jain',
+                        'email' => 'rishabh@gmail.com',
+                        'home_address' => 'cde',
+                        'home_phone' => '456',
+                        'cell_phone' => '654'
+                    ),
+                    array(
+                        'Id' => '10',
+                        'first_name' => 'Akash',
+                        'last_name' => 'Devani',
+                        'email' => 'akash@gmail.com',
+                        'home_address' => 'asv',
+                        'home_phone' => '887',
+                        'cell_phone' => '332'
+                    ),
+                );
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_print_array'])) {
+                     foreach ($products as $product) {
+                                 ?>
+                                                     <p>Id: <?php echo $product['Id']; ?></p>
+                                                     <p>First Name: <?php echo $product['first_name']; ?></p>
+                                                     <p>Last Name: <?php echo $product['last_name']; ?></p>
+                                                     <p>Email: <?php echo $product['email']; ?></p>
+                                                     <p>Home Address: <?php echo $product['home_address']; ?></p>
+                                                     <p>Home Phone: <?php echo $product['home_phone']; ?></p>
+                                                     <p>Cell Phone: <?php echo $product['cell_phone']; ?></p>
+                                                     <br>
+                                 <?php
+                                                 }
+
+                                 ?>
+                     <?php
+                }
+
+                ?>
+
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
 </body>
 </html>
